@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Dashboard DSS para análisis de ventas históricas semanales de 45 tiendas Walmart, 2010–2012.">
+<title>RetailPulse | DSS de Ventas Walmart</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" href="#inicio" aria-label="RetailPulse inicio"><div class="brandmark">R<span>↗</span></div><div><strong>RetailPulse</strong><small>DECISION INTELLIGENCE</small></div></a>
+    <div class="sidebar-label">NAVEGACIÓN</div>
+    <a href="#inicio" class="nav-item active"><span>◫</span> Resumen ejecutivo</a>
+    <a href="#analisis" class="nav-item"><span>▥</span> Análisis comercial</a>
+    <a href="#factores" class="nav-item"><span>◌</span> Factores externos</a>
+    <a href="#detalle" class="nav-item"><span>≡</span> Detalle de tiendas</a>
+    <div class="sidebar-note"><span class="online-dot"></span> ESTADO DE DATOS <strong>Fuente histórica validada</strong><p>45 tiendas · 143 semanas por tienda<br>05 feb 2010 – 26 oct 2012</p></div>
+    <div class="sidebar-bottom">Proyecto académico DSS · 2026</div>
+  </aside>
+  <main class="main" id="inicio">
+    <header class="topbar"><div class="breadcrumbs">ANALÍTICA REGIONAL <span>/</span> VENTAS HISTÓRICAS</div><div class="dataset-tag"><span class="online-dot"></span> Dataset local · sin servidor</div></header>
+    <div class="page-body">
+      <div class="page-heading"><div><div class="eyebrow">PANEL DE DIRECCIÓN REGIONAL <span class="tiny-line"></span> WALMART</div><h1>Inteligencia que <em>impulsa decisiones.</em></h1><p>Explora ventas, desempeño por tienda y señales externas. Todas las cifras responden a los filtros activos.</p></div><div class="heading-badge">2010 <span>—</span> 2012<br><small>HISTÓRICO</small></div></div>
+      <section class="filters" aria-label="Filtros del dashboard"><div class="filter-head"><span class="filter-icon">☷</span><strong>Segmentación</strong><span class="filter-help">Personaliza la lectura de los indicadores</span></div><div class="filter-fields"><label>Tienda<select id="storeFilter"><option value="all">Todas las tiendas</option></select></label><label>Año<select id="yearFilter"><option value="all">Todo el periodo</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option></select></label><label>Tipo de semana<select id="holidayFilter"><option value="all">Todas las semanas</option><option value="1">Festivas</option><option value="0">No festivas</option></select></label><button id="resetFilters" class="reset">↺ Restablecer</button></div></section>
+      <section class="kpi-grid" aria-label="Indicadores clave">
+        <div class="kpi"><div class="kpi-head">VENTAS ACUMULADAS <span class="kpi-glyph">＄</span></div><strong class="kpi-value" id="kpiSales">—</strong><div class="kpi-sub" id="kpiSalesSub">—</div><div class="kpi-bottom"><span class="kpi-pill">USD</span><span>Ventas históricas</span></div></div>
+        <div class="kpi"><div class="kpi-head">PROMEDIO SEMANAL / TIENDA <span class="kpi-glyph">▧</span></div><strong class="kpi-value" id="kpiAverage">—</strong><div class="kpi-sub" id="kpiAverageSub">—</div><div class="kpi-bottom"><span class="kpi-pill indigo">MEDIA</span><span>Por observación tienda-semana</span></div></div>
+        <div class="kpi"><div class="kpi-head">TIENDA LÍDER <span class="kpi-glyph">✦</span></div><strong class="kpi-value" id="kpiLeader">—</strong><div class="kpi-sub" id="kpiLeaderSub">—</div><div class="kpi-bottom"><span class="kpi-pill violet">RANKING</span><span>Mayor venta en el filtro</span></div></div>
+        <div class="kpi"><div class="kpi-head">DIFERENCIA FESTIVA <span class="kpi-glyph">↗</span></div><strong class="kpi-value" id="kpiHoliday">—</strong><div class="kpi-sub" id="kpiHolidaySub">—</div><div class="kpi-bottom"><span class="kpi-pill amber">COMPARATIVA</span><span id="kpiHolidayNote">Festivas vs. no festivas</span></div></div>
+      </section>
+      <section class="chart-grid" id="analisis">
+        <article class="panel panel-wide"><div class="panel-header"><div><div class="panel-kicker">01 / EVOLUCIÓN TEMPORAL</div><h2>Venta semanal promedio por año</h2><p>Normalizada por observación para comparar periodos de distinta duración.</p></div><div class="panel-token">USD / TIENDA-SEMANA</div></div><div id="trendChart" class="viz" role="img" aria-label="Gráfica de líneas de ventas semanales promedio por año"></div><div class="panel-foot">Nota: 2010 empieza en febrero y 2012 termina en octubre. La comparación anual no ajusta diferencias estacionales.</div></article>
+        <article class="panel"><div class="panel-header"><div><div class="panel-kicker">02 / DISTRIBUCIÓN</div><h2>Participación por semana</h2><p>Ventas acumuladas de semanas festivas y no festivas.</p></div></div><div id="holidayChart" class="donut-area" role="img" aria-label="Gráfica de dona de distribución de ventas por semana"></div><div class="panel-foot">Participación sobre ventas, no sobre cantidad de semanas.</div></article>
+        <article class="panel panel-wide"><div class="panel-header"><div><div class="panel-kicker">03 / RENDIMIENTO DE TIENDAS</div><h2>Tiendas con más ventas</h2><p>Clasificación por ventas acumuladas dentro de la selección.</p></div><div class="panel-token">TOP 10</div></div><div id="storesChart" class="bar-area" role="img" aria-label="Gráfica de barras de tiendas líderes"></div><div class="panel-foot" id="concentrationNote">—</div></article>
+        <article class="panel" id="factores"><div class="panel-header"><div><div class="panel-kicker">04 / ANÁLISIS EXTERNO</div><h2>Temperatura y ventas</h2><p>Promedios de cada tienda en los filtros activos.</p></div></div><div id="scatterChart" class="viz" role="img" aria-label="Gráfica de dispersión entre temperatura y ventas promedio"></div><div class="panel-foot" id="correlationNote">Asociación descriptiva; no demuestra causalidad.</div></article>
+        <article class="panel panel-full"><div class="panel-header"><div><div class="panel-kicker">05 / COMPARACIÓN MULTIANUAL</div><h2>Matriz de desempeño por tienda</h2><p>Promedio semanal de cada tienda por año; los tonos más intensos representan mayores valores.</p></div><div class="panel-token">MAPA DE CALOR</div></div><div id="heatmapChart" class="heatmap-wrap" role="img" aria-label="Mapa de calor de ventas semanales por año y tienda"></div><div class="panel-foot">Los promedios se calculan usando exclusivamente las semanas del filtro seleccionado.</div></article>
+      </section>
+      <section class="panel table-panel" id="detalle"><div class="panel-header"><div><div class="panel-kicker">06 / EXPLORADOR</div><h2>Detalle de tiendas</h2><p>Tabla ordenada por ventas; exporta los registros agrupados después de aplicar filtros.</p></div><button class="download" id="exportCSV">↧ Exportar CSV</button></div><div class="table-wrap"><table><thead><tr><th>POSICIÓN</th><th>TIENDA</th><th>VENTAS (USD)</th><th>MEDIA SEMANAL (USD)</th><th>PARTICIPACIÓN</th><th>OBSERVACIONES</th></tr></thead><tbody id="storeTable"></tbody></table></div></section>
+      <footer><span>RetailPulse · Sistema de Soporte a Decisiones</span><span>Fuente: <a href="https://www.kaggle.com/datasets/yasserh/walmart-dataset" target="_blank" rel="noopener">Walmart Dataset · M Yasser H</a></span><span>Datos 2010–2012; no representan operaciones actuales.</span></footer>
+    </div>
+  </main>
+</div>
+<div id="tooltip" class="tooltip" hidden></div>
+<script src="data.js"></script><script src="app.js"></script>
+</body></html>
